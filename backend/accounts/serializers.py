@@ -18,6 +18,5 @@ class UserSerializer(serializers.ModelSerializer):
                 last_name = validated_data['last_name']
             )
             user.set_password(validated_data['password'])
-            user.last_updated = timezone.now()
             user.save()
             return user
