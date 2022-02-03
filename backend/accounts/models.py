@@ -20,3 +20,7 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.email
+    
+    def save(self, *args, **kwargs):
+        self.last_updated = timezone.now()
+        super(User, self).save(*args, **kwargs)
