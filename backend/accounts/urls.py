@@ -5,6 +5,7 @@ from .views import (
     UserCreate,
     UpdateUserView,
     ChangePasswordView,
+    DeleteUserView,
     HelloView
     )
 
@@ -16,4 +17,5 @@ urlpatterns = [
     path('hello/', HelloView.as_view(), name='hello'),
     path('update/<int:pk>/', UpdateUserView.as_view(), name='update_user'),
     path('change_password/<int:pk>/', ChangePasswordView.as_view(), name='auth_change_password'),
+    path('delete/<int:pk>/', DeleteUserView.as_view())
 ]

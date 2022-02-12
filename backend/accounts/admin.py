@@ -8,6 +8,7 @@ class UserAdmin(admin.ModelAdmin):
     list_display = (
         "id",
         "email",
+        "username",
         "first_name",
         "last_name",
         "is_superuser",
@@ -19,6 +20,7 @@ class UserAdmin(admin.ModelAdmin):
 
     list_filter = (
         "email",
+        "username",
         "first_name",
         "last_name",
         "is_superuser",

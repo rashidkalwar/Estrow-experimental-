@@ -1,3 +1,4 @@
 backend/avatars
 .env
 backend/db.sqlite3
+*.sqlite3
