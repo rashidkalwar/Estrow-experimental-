@@ -37,8 +37,6 @@ class UserSerializer(serializers.ModelSerializer):
         user.save()
         return user
     
-    
-
 
 class UpdateUserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(required=True)

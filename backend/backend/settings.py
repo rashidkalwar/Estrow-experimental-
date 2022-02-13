@@ -44,9 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'rest_framework',
-  # 'rest_framework.authtoken',
     'rest_framework_simplejwt',
-    'drf_yasg',
 ]
 
 AUTH_USER_MODEL = 'accounts.User'
@@ -74,8 +72,10 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    )
+        'rest_framework.permissions.AllowAny',
+        #'rest_framework.permissions.IsAuthenticated', 
+    ),
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
 }
 
 SIMPLE_JWT = {

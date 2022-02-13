@@ -1,8 +1,8 @@
-from rest_framework import generics, status
+from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from django.contrib.auth import get_user_model, authenticate, login
+from django.contrib.auth import get_user_model
 
 
 from .serializers import UserSerializer, UpdateUserSerializer, ChangePasswordSerializer
@@ -30,7 +30,7 @@ class UpdateUserView(generics.UpdateAPIView):
 
 
 class HelloView(APIView):
-    permission_classes = (IsAuthenticated, )
+    permission_classes = ()
 
     def get(self, request):
         content = {'message':'Hello World!'}
