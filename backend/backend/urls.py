@@ -30,7 +30,7 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls), 
-    path('accounts/', include('accounts.urls')),
+    path('api/', include('accounts.urls')),
     #path('schema', schema_view, name='openapi-schema'),
     path('docs/', include_docs_urls(title='Estrow API'))
 ]
