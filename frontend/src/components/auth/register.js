@@ -1,12 +1,11 @@
 import axiosInstance from "../../utils/axios";
+import { Copyright, UseDisclaimer, PasswordField } from "./misc";
 // import { useNavigate } from "react-router-dom";
 
 //MaterialUI
-import * as React from "react";
+import { useState } from "react";
 import {
   TextField,
-  InputAdornment,
-  IconButton,
   Link,
   Grid,
   Box,
@@ -15,46 +14,7 @@ import {
   Typography,
   Container,
 } from "@mui/material";
-// import FormControlLabel from "@mui/material/FormControlLabel";
-// import Checkbox from "@mui/material/Checkbox";
-
-import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
-import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="#">
-        Estrow
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
-function Policies(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"By signing up, you agree to our "}
-      <Link color="inherit" href="#">
-        Terms & Conditions.
-      </Link>
-    </Typography>
-  );
-}
 
 export default function SignUp() {
   // const history = useNavigate();
@@ -67,11 +27,8 @@ export default function SignUp() {
     password: "",
   });
 
-  const [formData, updateFormData] = React.useState(initialFormData);
-  const [errors, setErrors] = React.useState(initialFormData);
-  const [showPassword, setShowPassword] = React.useState(false);
-  const handleClickShowPassword = () => setShowPassword(!showPassword);
-  const handleMouseDownPassword = () => setShowPassword(!showPassword);
+  const [formData, updateFormData] = useState(initialFormData);
+  const [errors, setErrors] = useState(initialFormData);
 
   const handleChange = (e) => {
     updateFormData({
@@ -174,39 +131,15 @@ export default function SignUp() {
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              <PasswordField
                 required
-                fullWidth
-                name="password"
-                label="Password"
-                type={showPassword ? "text" : "password"}
-                id="password"
-                autoComplete="new-password"
                 error={errors.password ? true : false}
                 onChange={handleChange}
                 helperText={errors.password?.[0]}
-                InputProps={{
-                  // <-- This is where the toggle view button is added.
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                      >
-                        {showPassword ? (
-                          <VisibilityOffOutlinedIcon />
-                        ) : (
-                          <VisibilityOutlinedIcon />
-                        )}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
               />
             </Grid>
             <Grid item xs={12}>
-              <Policies />
+              <UseDisclaimer />
             </Grid>
           </Grid>
           <Button
@@ -226,8 +159,8 @@ export default function SignUp() {
             </Grid>
           </Grid>
         </Box>
+        <Copyright sx={{ mt: 5 }} />
       </Box>
-      <Copyright sx={{ mt: 5 }} />
     </Container>
   );
 }
