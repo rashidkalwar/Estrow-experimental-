@@ -1,4 +1,6 @@
-import * as React from "react";
+import { useState } from "react";
+// import { useNavigate } from "react-router-dom";
+import axiosInstance from "../../utils/axios";
 import { Copyright, PasswordField } from "./misc";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -11,19 +13,68 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import CssBaseline from "@mui/material/CssBaseline";
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
+  // const history = useNavigate();
+
+  const initialFormData = Object.freeze({
+    username: "",
+    password: "",
+  });
+
+  const [formData, updateFormData] = useState(initialFormData);
+  const [errors, setErrors] = useState(initialFormData);
+
+  const handleChange = (e) => {
+    updateFormData({
+      ...formData,
+      //triming white spaces
+      [e.target.name]: e.target.value.trim(),
     });
+    setErrors({
+      ...errors,
+      [e.target.name]: "",
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+
+    axiosInstance
+      .post(`user/token/`, {
+        username: formData.username,
+        password: formData.password,
+      })
+      .then((res) => {
+        localStorage.setItem("access_token", res.data.access);
+        localStorage.setItem("refresh_token", res.data.refresh);
+        axiosInstance.defaults.headers["Authorization"] =
+          "Bearer " + localStorage.getItem("access_token");
+        // history.push("/");
+        console.log(res);
+        console.log(res.data);
+      })
+      .catch((error) => {
+        setErrors(error.response.data);
+      });
   };
 
   return (
     <Container component="main" maxWidth="xs">
+      <Box sx={{ mt: 8, mb: 4 }}>
+        <Typography variant="h3" fontWeight="bold">
+          Enjoy your vacations with{" "}
+          <Typography
+            style={{ fontSize: "inherit", fontWeight: "inherit" }}
+            color={"primary.main"}
+          >
+            {" "}
+            Estrow
+          </Typography>
+        </Typography>
+      </Box>
       <Box
         sx={{
           marginTop: 8,
@@ -43,22 +94,19 @@ export default function SignIn() {
             margin="normal"
             fullWidth
             id="username"
+            error={errors.username ? true : false}
             label="Username, or email"
             name="username"
-            autoComplete="email"
+            autoComplete="name"
             autoFocus
+            onChange={handleChange}
+            helperText={errors.username?.[0]}
           />
-          {/* <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          /> */}
-          <PasswordField />
+          <PasswordField
+            error={errors.password ? true : false}
+            onChange={handleChange}
+            helperText={errors.password?.[0]}
+          />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
