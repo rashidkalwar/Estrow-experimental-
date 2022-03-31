@@ -8,7 +8,7 @@ import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 const ThemeToggler = () => {
   const [{ isDark }, toggleTheme] = useContext(ThemeContext);
   return (
-    <Box sx={{ margin: '5px' }}>
+    <Box>
       <Tooltip title={isDark ? 'Turn on the light' : 'Turn off the light'}>
         <IconButton
           color="primary"
