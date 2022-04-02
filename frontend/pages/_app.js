@@ -1,13 +1,16 @@
-import CustomThemeProvider from 'src/theme/CustomThemeProvider';
-import createEmotionCache from 'src/theme/CreateEmotionCache';
-import { CacheProvider } from '@emotion/react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
+import { CacheProvider } from '@emotion/react';
+import createEmotionCache from 'src/theme/CreateEmotionCache';
+import CustomThemeProvider from 'src/theme/CustomThemeProvider';
 
+// Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
-function MyApp(props) {
+export default function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+
   return (
     <CacheProvider value={emotionCache}>
       <Head>
@@ -25,5 +28,3 @@ MyApp.propTypes = {
   emotionCache: PropTypes.object,
   pageProps: PropTypes.object.isRequired,
 };
-
-export default MyApp;

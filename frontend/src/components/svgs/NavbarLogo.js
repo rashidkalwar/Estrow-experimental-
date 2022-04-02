@@ -1,14 +1,14 @@
 import { useTheme } from '@mui/material/styles';
 
-const NavbarLogo = () => {
+const NavbarLogo = (props) => {
   const theme = useTheme();
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
       version="1.1"
-      width="120px"
-      height="60px"
+      width={props.width}
+      height={props.height}
       viewBox="0 0 3187.5 1419.4110245631518"
     >
       <g transform="scale(9.375) translate(10, 10)">

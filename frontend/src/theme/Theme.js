@@ -1,7 +1,4 @@
-import '@fontsource/inter';
-import { createTheme } from '@mui/material/styles';
-
-export const light = createTheme({
+export const light = {
   palette: {
     mode: 'light',
     primary: {
@@ -12,6 +9,7 @@ export const light = createTheme({
   },
   typography: {
     fontFamily: ['inter'].join(','),
+    // fontFamily: ['roboto'].join(','),
     h3: {
       // fontWeight: 700,
     },
@@ -55,24 +53,10 @@ export const light = createTheme({
         },
       },
     },
-    MuiAppBar: {
-      styleOverrides: {
-        root: {
-          // boxShadow: '0 3px 5px 2px #002e54',
-          boxShadow: 'none',
-          borderBottom: '1px solid #c5e3ff',
-          minHeight: '56px',
-          paddingLeft: 'auto',
-          paddingRight: 'auto',
-          height: '60px',
-          justifyContent: 'center',
-        },
-      },
-    },
   },
-});
+};
 
-export const dark = createTheme({
+export const dark = {
   palette: {
     mode: 'dark',
     primary: {
@@ -86,6 +70,7 @@ export const dark = createTheme({
   },
   typography: {
     fontFamily: ['inter'].join(','),
+    // fontFamily: ['roboto'].join(','),
   },
   components: {
     MuiButton: {
@@ -118,21 +103,7 @@ export const dark = createTheme({
         },
       },
     },
-    MuiAppBar: {
-      styleOverrides: {
-        root: {
-          // boxShadow: '0 3px 5px 2px #002e54',
-          boxShadow: 'none',
-          borderBottom: '1px solid #1d5a8c',
-          minHeight: '56px',
-          paddingLeft: 'auto',
-          paddingRight: 'auto',
-          height: '60px',
-          justifyContent: 'center',
-        },
-      },
-    },
   },
-});
+};
 
 export default light;

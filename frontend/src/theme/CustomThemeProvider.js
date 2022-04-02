@@ -1,8 +1,9 @@
 import { createContext, useState, useEffect } from 'react';
-import { ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { light, dark } from 'src/theme/Theme';
 
-import { light, dark } from 'src/theme/theme';
+let currentTheme;
 
 export const ThemeContext = createContext();
 
@@ -12,8 +13,8 @@ const CustomThemeProvider = ({ children }) => {
     localStorage.setItem('isDark', JSON.stringify(!isDark));
     setIsDark(!isDark);
   };
-  const theme = isDark ? dark : light;
-
+  const theme = isDark ? createTheme(dark) : createTheme(light);
+  currentTheme = theme;
   useEffect(() => {
     const isDark = localStorage.getItem('isDark') === 'true';
     setIsDark(isDark);
@@ -31,3 +32,5 @@ const CustomThemeProvider = ({ children }) => {
 };
 
 export default CustomThemeProvider;
+
+export { currentTheme };
