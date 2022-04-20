@@ -1,30 +1,13 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import Head from 'next/head';
-import { CacheProvider } from '@emotion/react';
-import createEmotionCache from 'src/theme/CreateEmotionCache';
-import CustomThemeProvider from 'src/theme/CustomThemeProvider';
+import '../styles/globals.css';
+import 'tailwindcss/tailwind.css';
+import { ThemeProvider } from 'next-themes';
 
-// Client-side cache, shared for the whole session of the user in the browser.
-const clientSideEmotionCache = createEmotionCache();
-
-export default function MyApp(props) {
-  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
-
+function MyApp({ Component, pageProps }) {
   return (
-    <CacheProvider value={emotionCache}>
-      <Head>
-        <meta name="viewport" content="initial-scale=1, width=device-width" />
-      </Head>
-      <CustomThemeProvider>
-        <Component {...pageProps} />
-      </CustomThemeProvider>
-    </CacheProvider>
+    <ThemeProvider enableSystem={true} attribute="class">
+      <Component {...pageProps} />
+    </ThemeProvider>
   );
 }
 
-MyApp.propTypes = {
-  Component: PropTypes.elementType.isRequired,
-  emotionCache: PropTypes.object,
-  pageProps: PropTypes.object.isRequired,
-};
+export default MyApp;
