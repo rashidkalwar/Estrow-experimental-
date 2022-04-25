@@ -181,7 +181,7 @@ export default function MainNavbar() {
                   Sign in
                 </a>
               </Link>
-              <Link href="/signup">
+              <Link href="/register">
                 <a className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-xl shadow-sm text-base font-medium text-white bg-blue-500 hover:bg-blue-600">
                   Get Started
                   <ChevronRightIcon
@@ -274,7 +274,7 @@ export default function MainNavbar() {
                 </div>
                 <div>
                   <Link
-                    href="#"
+                    href="/register"
                     className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700"
                   >
                     Get Started

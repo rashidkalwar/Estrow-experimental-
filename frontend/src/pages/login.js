@@ -5,7 +5,7 @@ import MainNavbar from 'src/components/navbars/MainNavbar';
 import UserSignIn from 'src/components/UserSignIn';
 import ParticleBackground from 'src/components/particleBackground';
 
-export default function SignIn() {
+export default function LoginPage() {
   return (
     <React.Fragment>
       <Head>

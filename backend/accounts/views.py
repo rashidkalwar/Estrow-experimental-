@@ -1,11 +1,11 @@
-from rest_framework import generics
+from rest_framework import generics, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
 
 
-from .serializers import UserSerializer, UpdateUserSerializer, ChangePasswordSerializer
+from .serializers import UserSerializer, UpdateUserSerializer, ChangePasswordSerializer, UserSerializer 
 # Create your views here.
 
 
@@ -36,6 +36,21 @@ class HelloView(APIView):
         content = {'message':'Hello World!'}
         return Response(content)
 
+class LoadUserView(APIView):
+    def get(self, request, format=None):
+        try:
+            user = request.user
+            user = UserSerializer(user)
+
+            return Response(
+                {'user': user.data},
+                status=status.HTTP_200_OK
+            )
+        except:
+            return Response(
+                {'error': 'Something went wrong when trying to load user'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
 
 class DeleteUserView(generics.DestroyAPIView):
     User = get_user_model()
