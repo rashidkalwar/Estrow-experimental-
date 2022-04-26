@@ -1,11 +1,20 @@
 import * as React from 'react';
+import { useDispatch } from 'react-redux';
 import Head from 'next/head';
 
+import { request_refresh } from 'src/actions/auth';
 import MainNavbar from 'src/components/navbars/MainNavbar';
 import UserSignIn from 'src/components/UserSignIn';
 import ParticleBackground from 'src/components/particleBackground';
 
 export default function LoginPage() {
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    if (dispatch && dispatch !== null && dispatch !== undefined)
+      dispatch(request_refresh());
+  }, [dispatch]);
+
   return (
     <React.Fragment>
       <Head>

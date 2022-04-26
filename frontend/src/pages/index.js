@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useDispatch } from 'react-redux';
 import Head from 'next/head';
 import {
   CodeIcon,
@@ -8,11 +9,19 @@ import {
   DocumentTextIcon,
 } from '@heroicons/react/outline';
 
+import { request_refresh } from 'src/actions/auth';
 import MainNavbar from 'src/components/navbars/MainNavbar';
 import MainFooter from 'src/components/MainFooter';
 import HomePageSvg from 'src/svgs/homepageSVG';
 
 export default function Home() {
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    if (dispatch && dispatch !== null && dispatch !== undefined)
+      dispatch(request_refresh());
+  }, [dispatch]);
+
   return (
     <React.Fragment>
       <Head>
