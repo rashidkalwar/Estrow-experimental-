@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const MainFooter = () => {
   return (
-    <footer className="relative top-0 bg-slate-200 pt-8 pb-6">
+    <footer className="relative top-0 bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100 pt-8 pb-6">
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap">
           <div className="w-full md:w-6/12 px-4">
