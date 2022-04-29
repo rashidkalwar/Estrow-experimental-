@@ -2,6 +2,7 @@ import { Fragment } from 'react';
 import { Popover, Transition } from '@headlessui/react';
 import ThemeToggler from 'src/components/ThemeToggler';
 import Link from 'next/link';
+import { useSelector } from 'react-redux';
 import {
   ChartBarIcon,
   CursorClickIcon,
@@ -16,6 +17,7 @@ import {
 import { ChevronDownIcon, ChevronRightIcon } from '@heroicons/react/solid';
 
 import NavbarLogo from 'src/svgs/logo';
+import UserNavMenu from 'src/components/UserDropdownNavMenu';
 
 const solutions = [
   {
@@ -61,6 +63,8 @@ function classNames(...classes) {
 }
 
 export default function MainNavbar() {
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
   return (
     <header>
       <Popover className="relative bg-inherit bg-opacity-60">
@@ -176,22 +180,28 @@ export default function MainNavbar() {
             </Popover.Group>
             <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
               <ThemeToggler className="mr-5" />
-              <Link href="/login">
-                <a className="whitespace-nowrap text-base font-medium text-gray-500 dark:text-white dark:hover:text-gray-300 hover:text-gray-900">
-                  Sign in
-                </a>
-              </Link>
-              <Link href="/register">
-                <a className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-xl shadow-sm text-base font-medium text-white bg-blue-500 hover:bg-blue-600">
-                  Get Started
-                  <ChevronRightIcon
-                    className={classNames(
-                      'text-white ml-1 h-5 w-5 group-hover:text-gray-500 '
-                    )}
-                    aria-hidden="true"
-                  />
-                </a>
-              </Link>
+              {isAuthenticated ? (
+                <UserNavMenu />
+              ) : (
+                <>
+                  <Link href="/login">
+                    <a className="whitespace-nowrap text-base font-medium text-gray-500 dark:text-white dark:hover:text-gray-300 hover:text-gray-900">
+                      Sign in
+                    </a>
+                  </Link>
+                  <Link href="/register">
+                    <a className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-xl shadow-sm text-base font-medium text-white bg-blue-500 hover:bg-blue-600">
+                      Get Started
+                      <ChevronRightIcon
+                        className={classNames(
+                          'text-white ml-1 h-5 w-5 group-hover:text-gray-500 '
+                        )}
+                        aria-hidden="true"
+                      />
+                    </a>
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>
