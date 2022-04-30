@@ -32,8 +32,7 @@ export default function UserSignUp() {
       dispatch(register(first_name, last_name, username, email, password));
   };
 
-  if (typeof window !== 'undefined' && isAuthenticated)
-    router.push('/dashboard');
+  if (typeof window !== 'undefined' && isAuthenticated) router.push('/');
   if (register_success) router.push('/login');
 
   return (

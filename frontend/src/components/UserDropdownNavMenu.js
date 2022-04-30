@@ -16,7 +16,7 @@ const UserNavMenu = () => {
       <div className="ml-2 flex items-center md:ml-4">
         <Menu as="div" className=" relative">
           <div>
-            <Menu.Button className="max-w-xs bg-gray-800 rounded-full flex items-center text-sm dark:bg-slate-900 justify-center hover:ring-2 ring-blue-400 transition-all focus:outline-none">
+            <Menu.Button className="max-w-xs bg-gray-800 rounded-full flex items-center text-sm dark:bg-slate-900 justify-center hover:ring-4 ring-blue-400 transition-all focus:outline-none">
               <span className="sr-only">Open user menu</span>
               <img
                 className="h-10 w-10 rounded-full"
