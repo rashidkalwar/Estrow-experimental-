@@ -9,7 +9,7 @@ const ThemeToggler = (props) => {
   if (!mounted) return null;
   return (
     <button
-      className={`${props.className} w-8 h-8 bg-blue-100 rounded-lg dark:bg-slate-900 flex items-center justify-center hover:ring-2 ring-blue-400 transition-all focus:outline-none`}
+      className={`${props.className} w-8 h-8 bg-blue-100 rounded-lg dark:bg-slate-800 flex items-center justify-center hover:ring-2 ring-blue-400 transition-all focus:outline-none`}
       onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
       aria-label="Toggle Dark Mode"
     >

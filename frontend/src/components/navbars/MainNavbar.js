@@ -67,7 +67,7 @@ export default function MainNavbar() {
 
   return (
     <header>
-      <Popover className="relative bg-inherit bg-opacity-60">
+      <Popover className="relative bg-transparent">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 ">
           <div className="flex justify-between items-center px-3 py-3 md:justify-start md:space-x-10">
             <div className="flex justify-start lg:w-0 lg:flex-1">
