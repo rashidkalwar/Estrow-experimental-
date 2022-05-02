@@ -1,9 +1,11 @@
+import { useDispatch } from 'react-redux';
 import { Fragment } from 'react';
 import { Popover, Transition } from '@headlessui/react';
 import ThemeToggler from 'src/components/ThemeToggler';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import {
+  LogoutIcon,
   ChartBarIcon,
   CursorClickIcon,
   MenuIcon,
@@ -17,6 +19,7 @@ import {
 import { ChevronDownIcon, ChevronRightIcon } from '@heroicons/react/solid';
 
 import NavbarLogo from 'src/svgs/logo';
+import { logout } from 'src/actions/auth';
 import UserNavMenu from 'src/components/UserDropdownNavMenu';
 
 const solutions = [
@@ -64,6 +67,13 @@ function classNames(...classes) {
 
 export default function MainNavbar() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
+  const dispatch = useDispatch();
+
+  const logoutHandler = () => {
+    if (dispatch && dispatch !== null && dispatch !== undefined)
+      dispatch(logout());
+  };
 
   return (
     <header>
@@ -282,21 +292,44 @@ export default function MainNavbar() {
                     Help Center
                   </Link>
                 </div>
-                <div>
-                  <Link
-                    href="/register"
-                    className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700"
-                  >
-                    Get Started
-                  </Link>
-                  <p className="mt-6 text-center text-base font-medium text-gray-500 dark:text-slate-50">
-                    Existing user?{' '}
-                    <Link href="/login">
-                      <a className="text-blue-600 hover:text-blue-500">
-                        Sign in
-                      </a>
-                    </Link>
-                  </p>
+                <div className="flex flex-col justify-center items-center">
+                  {isAuthenticated ? (
+                    <button
+                      type="button"
+                      onClick={logoutHandler}
+                      class="whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-xl shadow-sm text-base font-medium text-white bg-blue-500 hover:bg-blue-600"
+                    >
+                      <LogoutIcon
+                        className={classNames(
+                          'text-white mr-2 h-5 w-5 group-hover:text-gray-500 '
+                        )}
+                        aria-hidden="true"
+                      />
+                      Logout
+                    </button>
+                  ) : (
+                    <>
+                      <Link href="/register">
+                        <a className="whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-xl shadow-sm text-base font-medium text-white bg-blue-500 hover:bg-blue-600">
+                          Get Started
+                          <ChevronRightIcon
+                            className={classNames(
+                              'text-white ml-1 h-5 w-5 group-hover:text-gray-500 '
+                            )}
+                            aria-hidden="true"
+                          />
+                        </a>
+                      </Link>
+                      <p className="mt-6 text-center text-base font-medium text-gray-500 dark:text-slate-50">
+                        Existing user?{' '}
+                        <Link href="/login">
+                          <a className="text-blue-600 hover:text-blue-500">
+                            Sign in
+                          </a>
+                        </Link>
+                      </p>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
