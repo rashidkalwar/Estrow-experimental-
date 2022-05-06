@@ -9,7 +9,7 @@ from .managers import UserManager
 class User(AbstractUser):
     username = models.CharField(max_length=150, unique=True)
     email = models.EmailField(_('email address'), unique=True)
-    photo = models.ImageField(upload_to='avatars/', null=True, blank=True)
+    # photo = models.ImageField(upload_to='avatars/', null=True, blank=True)
     last_updated = models.DateTimeField(null=True, blank=True)
     about = models.TextField(_(
         'about'), max_length=500, blank=True)
